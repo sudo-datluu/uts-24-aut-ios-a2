@@ -10,8 +10,8 @@ import SwiftUI
 struct GameSettingView: View {
     @StateObject var highScoreViewModel = HighScoreViewModel()
     @State private var countdownInput = ""
-    @State private var countdownValue: Double = 10
-    @State private var numberBubbles: Double = 1
+    @State private var countdownValue: Double = 60
+    @State private var numberBubbles: Double = 15
     
     var body: some View {
         Label("Game setting", systemImage: "")
@@ -25,7 +25,7 @@ struct GameSettingView: View {
         ).padding()
         
         Text("Game Time")
-        Slider(value: $countdownValue, in: 10...60, step: 1).padding()
+        Slider(value: $countdownValue, in: 60...100, step: 1).padding()
         Text("\(Int(countdownValue))").padding()
         Text("Max number of bubbles")
         Slider(value: $numberBubbles, in: 1...15, step: 1).padding()
