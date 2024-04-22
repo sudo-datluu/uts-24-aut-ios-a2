@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Label("Bubble Pop", systemImage: "")
+                Text("Bubble Pop")
                     .foregroundColor(.red)
                     .font(.largeTitle)
                 Spacer()
@@ -31,7 +31,6 @@ struct ContentView: View {
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     }
                 )
-                
                 Spacer()
                 
             }

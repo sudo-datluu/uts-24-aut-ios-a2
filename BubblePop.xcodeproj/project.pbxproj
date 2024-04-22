@@ -13,9 +13,12 @@
 		A306A6662BBBC4E4002D8F1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A306A6652BBBC4E4002D8F1E /* Preview Assets.xcassets */; };
 		A306A66D2BBBC59B002D8F1E /* GameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306A66C2BBBC59B002D8F1E /* GameSettingView.swift */; };
 		A306A66F2BBBC5DB002D8F1E /* HighScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306A66E2BBBC5DB002D8F1E /* HighScoreView.swift */; };
-		A306A6712BBBC7ED002D8F1E /* HighScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306A6702BBBC7ED002D8F1E /* HighScoreViewModel.swift */; };
 		A306A6732BBBCA63002D8F1E /* StartGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306A6722BBBCA63002D8F1E /* StartGameView.swift */; };
 		A34DC0AF2BD211AB00A88B49 /* BubbleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34DC0AE2BD211AB00A88B49 /* BubbleModel.swift */; };
+		A34DC0B22BD606BC00A88B49 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34DC0B12BD606BC00A88B49 /* GameController.swift */; };
+		A3EA77702BD638CD00FB08B0 /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EA776F2BD638CD00FB08B0 /* ScoreModel.swift */; };
+		A3EA77722BD6391D00FB08B0 /* ScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EA77712BD6391D00FB08B0 /* ScoreController.swift */; };
+		A3EA77742BD6586000FB08B0 /* score.json in Resources */ = {isa = PBXBuildFile; fileRef = A3EA77732BD6586000FB08B0 /* score.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +29,12 @@
 		A306A6652BBBC4E4002D8F1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A306A66C2BBBC59B002D8F1E /* GameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingView.swift; sourceTree = "<group>"; };
 		A306A66E2BBBC5DB002D8F1E /* HighScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreView.swift; sourceTree = "<group>"; };
-		A306A6702BBBC7ED002D8F1E /* HighScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreViewModel.swift; sourceTree = "<group>"; };
 		A306A6722BBBCA63002D8F1E /* StartGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameView.swift; sourceTree = "<group>"; };
 		A34DC0AE2BD211AB00A88B49 /* BubbleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleModel.swift; sourceTree = "<group>"; };
+		A34DC0B12BD606BC00A88B49 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		A3EA776F2BD638CD00FB08B0 /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
+		A3EA77712BD6391D00FB08B0 /* ScoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreController.swift; sourceTree = "<group>"; };
+		A3EA77732BD6586000FB08B0 /* score.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = score.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,13 +67,12 @@
 		A306A65D2BBBC4DF002D8F1E /* BubblePop */ = {
 			isa = PBXGroup;
 			children = (
+				A34DC0B32BD61E0400A88B49 /* Views */,
+				A34DC0B02BD606AC00A88B49 /* Controller */,
 				A306A6742BC50CEF002D8F1E /* Models */,
 				A306A65E2BBBC4DF002D8F1E /* BubblePopApp.swift */,
-				A306A6602BBBC4DF002D8F1E /* ContentView.swift */,
-				A306A66C2BBBC59B002D8F1E /* GameSettingView.swift */,
-				A306A6722BBBCA63002D8F1E /* StartGameView.swift */,
-				A306A66E2BBBC5DB002D8F1E /* HighScoreView.swift */,
 				A306A6622BBBC4E4002D8F1E /* Assets.xcassets */,
+				A3EA77732BD6586000FB08B0 /* score.json */,
 				A306A6642BBBC4E4002D8F1E /* Preview Content */,
 			);
 			path = BubblePop;
@@ -84,10 +89,30 @@
 		A306A6742BC50CEF002D8F1E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A306A6702BBBC7ED002D8F1E /* HighScoreViewModel.swift */,
 				A34DC0AE2BD211AB00A88B49 /* BubbleModel.swift */,
+				A3EA776F2BD638CD00FB08B0 /* ScoreModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A34DC0B02BD606AC00A88B49 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A34DC0B12BD606BC00A88B49 /* GameController.swift */,
+				A3EA77712BD6391D00FB08B0 /* ScoreController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A34DC0B32BD61E0400A88B49 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A306A6602BBBC4DF002D8F1E /* ContentView.swift */,
+				A306A66C2BBBC59B002D8F1E /* GameSettingView.swift */,
+				A306A6722BBBCA63002D8F1E /* StartGameView.swift */,
+				A306A66E2BBBC5DB002D8F1E /* HighScoreView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +175,7 @@
 			files = (
 				A306A6662BBBC4E4002D8F1E /* Preview Assets.xcassets in Resources */,
 				A306A6632BBBC4E4002D8F1E /* Assets.xcassets in Resources */,
+				A3EA77742BD6586000FB08B0 /* score.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,11 +186,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A306A6712BBBC7ED002D8F1E /* HighScoreViewModel.swift in Sources */,
+				A3EA77722BD6391D00FB08B0 /* ScoreController.swift in Sources */,
 				A306A6732BBBCA63002D8F1E /* StartGameView.swift in Sources */,
 				A306A66D2BBBC59B002D8F1E /* GameSettingView.swift in Sources */,
 				A306A66F2BBBC5DB002D8F1E /* HighScoreView.swift in Sources */,
 				A34DC0AF2BD211AB00A88B49 /* BubbleModel.swift in Sources */,
+				A34DC0B22BD606BC00A88B49 /* GameController.swift in Sources */,
+				A3EA77702BD638CD00FB08B0 /* ScoreModel.swift in Sources */,
 				A306A6612BBBC4DF002D8F1E /* ContentView.swift in Sources */,
 				A306A65F2BBBC4DF002D8F1E /* BubblePopApp.swift in Sources */,
 			);
