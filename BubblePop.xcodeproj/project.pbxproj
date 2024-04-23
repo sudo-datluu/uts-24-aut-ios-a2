@@ -18,7 +18,7 @@
 		A34DC0B22BD606BC00A88B49 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34DC0B12BD606BC00A88B49 /* GameController.swift */; };
 		A3EA77702BD638CD00FB08B0 /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EA776F2BD638CD00FB08B0 /* ScoreModel.swift */; };
 		A3EA77722BD6391D00FB08B0 /* ScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EA77712BD6391D00FB08B0 /* ScoreController.swift */; };
-		A3EA77742BD6586000FB08B0 /* score.json in Resources */ = {isa = PBXBuildFile; fileRef = A3EA77732BD6586000FB08B0 /* score.json */; };
+		A3EA77762BD7907E00FB08B0 /* AnimatedScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EA77752BD7907E00FB08B0 /* AnimatedScoreModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		A34DC0B12BD606BC00A88B49 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		A3EA776F2BD638CD00FB08B0 /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
 		A3EA77712BD6391D00FB08B0 /* ScoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreController.swift; sourceTree = "<group>"; };
-		A3EA77732BD6586000FB08B0 /* score.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = score.json; sourceTree = "<group>"; };
+		A3EA77752BD7907E00FB08B0 /* AnimatedScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedScoreModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,6 @@
 				A306A6742BC50CEF002D8F1E /* Models */,
 				A306A65E2BBBC4DF002D8F1E /* BubblePopApp.swift */,
 				A306A6622BBBC4E4002D8F1E /* Assets.xcassets */,
-				A3EA77732BD6586000FB08B0 /* score.json */,
 				A306A6642BBBC4E4002D8F1E /* Preview Content */,
 			);
 			path = BubblePop;
@@ -91,6 +90,7 @@
 			children = (
 				A34DC0AE2BD211AB00A88B49 /* BubbleModel.swift */,
 				A3EA776F2BD638CD00FB08B0 /* ScoreModel.swift */,
+				A3EA77752BD7907E00FB08B0 /* AnimatedScoreModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,7 +175,6 @@
 			files = (
 				A306A6662BBBC4E4002D8F1E /* Preview Assets.xcassets in Resources */,
 				A306A6632BBBC4E4002D8F1E /* Assets.xcassets in Resources */,
-				A3EA77742BD6586000FB08B0 /* score.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +194,7 @@
 				A3EA77702BD638CD00FB08B0 /* ScoreModel.swift in Sources */,
 				A306A6612BBBC4DF002D8F1E /* ContentView.swift in Sources */,
 				A306A65F2BBBC4DF002D8F1E /* BubblePopApp.swift in Sources */,
+				A3EA77762BD7907E00FB08B0 /* AnimatedScoreModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

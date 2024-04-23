@@ -47,7 +47,13 @@ class ScoreController {
     
     // Return the list of scores
     func getScores() -> [ScoreModel] {
+        load()
         return scores
+    }
+    
+    // Get high score
+    func getHighScore() -> String {
+        return scores.count <= 0 ? "No record" : String(format: "%.1f", scores[0].score)
     }
     
     func getFileURL() -> URL {

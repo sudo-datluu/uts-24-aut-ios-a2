@@ -12,8 +12,9 @@ struct Bubble: Identifiable, Equatable {
     let id = UUID()
     let color: Color
     let points: Double
-    let position: CGPoint
+    var position : CGPoint
     let creationTime: Date
+    let size: CGFloat
 
     // A dictionary to associate colors with points
     static let colorPoints: [Color: Double] = [
@@ -49,16 +50,24 @@ struct Bubble: Identifiable, Equatable {
     }
     
     // Check if this bubble overlaps with another
-    func overlaps(with other: Bubble, radius: CGFloat = 25) -> Bool {
+    func overlaps(with other: Bubble) -> Bool {
         let distance = sqrt(pow(self.position.x - other.position.x, 2) + pow(self.position.y - other.position.y, 2))
-        return distance < (radius * 2) // If distance is less than double the radius, they overlap
+        return distance < (size * 2) // If distance is less than double the size, they overlap
+    }
+    
+    // Get random location
+    static func randomLocation(bubbleSize: CGFloat) -> CGPoint {
+        let randomX = CGFloat.random(in: bubbleSize...(UIScreen.main.bounds.width - bubbleSize))
+        let randomY = CGFloat.random(in: bubbleSize...(UIScreen.main.bounds.height - bubbleSize - 250))
+        return CGPoint(x: randomX, y: randomY)
     }
 
-    init(position: CGPoint, creationTime: Date = Date()) {
-        self.position = position
+    init(size: CGFloat, creationTime: Date = Date()) {
         self.creationTime = creationTime
         let randomColorAndPoints = Bubble.randomColorAndPoints()
         self.color = randomColorAndPoints.0
         self.points = randomColorAndPoints.1
+        self.size = size
+        self.position = Bubble.randomLocation(bubbleSize: size)
     }
 }

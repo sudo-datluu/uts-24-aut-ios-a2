@@ -6,14 +6,14 @@
 //
 
 import Foundation
-struct ScoreModel : Identifiable {
+struct ScoreModel : Codable {
     var playerName: String
     var score: Double
-    let id = UUID()
-    
+    var id: UUID
     
     init(playerName: String, score: Double) {
         self.playerName = playerName
         self.score = score
+        self.id = UUID()
     }
 }

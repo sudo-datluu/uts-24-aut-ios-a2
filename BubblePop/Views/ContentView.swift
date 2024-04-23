@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var scoreController = ScoreController() // Score controller for the app
     var body: some View {
         NavigationView {
             VStack {
+                //Title
                 Text("Bubble Pop")
                     .foregroundColor(.red)
                     .font(.largeTitle)
                 Spacer()
+                
+                // Navigate to game setting
                 NavigationLink(
-                    destination: GameSettingView(), 
+                    destination: GameSettingView(scoreController: scoreController), 
                     label: {
                         Text("New Game")
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -24,8 +28,9 @@ struct ContentView: View {
                 )
                 .padding(50)
                 
+                //Navigate to leaderboard
                 NavigationLink(
-                    destination: HighScoreView(),
+                    destination: HighScoreView(scoreController: scoreController),
                     label: {
                         Text("Leaderboard")
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -37,8 +42,4 @@ struct ContentView: View {
             .padding()
         }
     }
-}
-
-#Preview {
-    ContentView()
 }
