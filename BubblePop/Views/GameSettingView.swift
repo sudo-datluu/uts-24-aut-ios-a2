@@ -6,6 +6,8 @@ struct GameSettingView: View {
     @State private var gameDuration: Double = 60 // Default game time in seconds
     @State private var maxBubbles: Double = 15 // Default maximum number of bubbles
     @State private var startGame: Bool = false // State to control when to start the game
+    
+    // List that instruct the scoring
     private let colorPointsInstruction: [(Color, String)] = [
         (.red, "1pts"),
         (.pink, "2pts"),
@@ -54,21 +56,23 @@ struct GameSettingView: View {
 
             Spacer()
             
-            // Section: Bubble Points
+            // Scoring instruction
             VStack(alignment: .leading) {
                 List(colorPointsInstruction, id: \.0) { object in
                     HStack {
+                        // Render circle if the color is not orange
+                        // Else rectangle would be double the score
                         if object.0 != Color.orange {
                             Circle()
-                            .fill(object.0) // Bubble color
-                            .frame(width: 20, height: 20) // Circle size
+                            .fill(object.0)
+                            .frame(width: 20, height: 20)
                         } else {
                             Rectangle()
-                            .fill(object.0) // Bubble color
-                            .frame(width: 20, height: 20) //
+                            .fill(object.0)
+                            .frame(width: 20, height: 20)
                         }
                         
-                        Text(object.1) // Bubble score
+                        Text(object.1) // Object score
                     }
                 }
                 .padding(.top, 10) // Padding to separate from list

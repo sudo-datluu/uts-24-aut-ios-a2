@@ -17,7 +17,7 @@ struct StartGameView: View {
     @State private var scoreTimer: Timer? = nil // Timer for score visibility
     var body: some View {
         VStack {
-            // Display the current score, time remain and number of current bubbles
+            // Display the current score, time remain and highest score
             HStack {
                 let stringScore = String(format: "%.1f", gameController.score)
                 Text("Score: \(stringScore)")
@@ -66,6 +66,19 @@ struct StartGameView: View {
                         }
                 }
                 
+                // Display each bomb from the game controller
+                ForEach(gameController.bombs) { bomb in
+                    Rectangle()
+                        .frame(width: bomb.size, height: bomb.size)
+                        .position(x: bomb.position.x, y: bomb.position.y)
+                        .foregroundColor(.orange)
+                        .onTapGesture {
+                            gameController.touchBomb(bomb) // Double the score when touched
+                            executeAnimateForScore(0, at: bomb.position, targetScores: &bonusScores)
+                        }
+                }
+                
+                // Display received score for the bubble
                 ForEach(receivedScores) { animatedScore in
                     Text("+\(animatedScore.value.formatted())")
                         .position(animatedScore.position)
@@ -76,6 +89,7 @@ struct StartGameView: View {
                         .animation(.easeInOut, value: 1) // Control the duration of visibility
                 }
                 
+                // Display bonus score for the bomb
                 ForEach(bonusScores) { animatedScore in
                     Text("x2 Scores")
                         .position(animatedScore.position)
@@ -84,17 +98,7 @@ struct StartGameView: View {
                         .transition(.opacity) // Fade-in effect
                         .animation(.easeInOut, value: 1) // Control the duration of visibility
                 }
-                
-                ForEach(gameController.bombs) { bomb in
-                    Rectangle()
-                        .frame(width: bomb.size, height: bomb.size)
-                        .position(x: bomb.position.x, y: bomb.position.y)
-                        .foregroundColor(.orange)
-                        .onTapGesture {
-                            gameController.touchBomb(bomb) // Deduct half the score when touched
-                            executeAnimateForScore(0, at: bomb.position, targetScores: &bonusScores)
-                        }
-                }
+
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             

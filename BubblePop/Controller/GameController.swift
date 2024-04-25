@@ -113,17 +113,11 @@ class GameController: ObservableObject {
             bomb.position.y >= 0 && bomb.position.y <= UIScreen.main.bounds.height
         }
         
-        // Bomb would appear with 10%
+        // Bomb would appear with 5%
         if Double.random(in: 0...1) <= 0.05 {
             let randomX = CGFloat.random(in: 0...UIScreen.main.bounds.width)
             let randomY = CGFloat.random(in: 0...UIScreen.main.bounds.height)
             bombs.append(BombModel(position: CGPoint(x: randomX, y: randomY)))
         }
-    }
-    
-    // Update game
-    func update() {
-        updateBubbles()
-        updateBombs()
     }
 }

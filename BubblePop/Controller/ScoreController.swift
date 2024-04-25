@@ -57,6 +57,7 @@ class ScoreController {
         return scores.count <= 0 ? "No record" : String(format: "%.1f", scores[0].score)
     }
     
+    // Get the score.json file URL
     func getFileURL() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent(fileName) // The path to the scores JSON file
