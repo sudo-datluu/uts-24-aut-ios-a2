@@ -14,8 +14,10 @@ struct ContentView: View {
             VStack {
                 //Title
                 Text("Bubble Pop")
-                    .foregroundColor(.red)
+                    .foregroundColor(.blue)
                     .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 20)
                 Spacer()
                 
                 // Navigate to game setting

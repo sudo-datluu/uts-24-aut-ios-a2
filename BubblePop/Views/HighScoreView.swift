@@ -14,18 +14,11 @@ struct HighScoreView: View {
         var body: some View {
             VStack {
                 Text("High scores")
-                    .foregroundColor(.red)
-                    .font(.title)
-                    .padding(50)
-                // Start new game
-                NavigationLink(
-                    destination: GameSettingView(scoreController: scoreController),
-                    label: {
-                        Text("New Game")
-                            .font(.title)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                    }
-                )
+                    .foregroundColor(.blue)
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 20)
+
                 // Wait until the score is load
                 if isLoaded {
                     // Show list of the high score
@@ -46,6 +39,19 @@ struct HighScoreView: View {
             .onAppear {
                 loadScores() // Load scores when view appears
             }
+            // Start new game
+            NavigationLink(
+                destination: GameSettingView(scoreController: scoreController),
+                label: {
+                    Text("New Game")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .bold()
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+            )
         }
 
     private func loadScores() {
@@ -54,3 +60,6 @@ struct HighScoreView: View {
     }
 }
 
+#Preview {
+    HighScoreView(scoreController: ScoreController())
+}

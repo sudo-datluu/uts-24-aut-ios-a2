@@ -37,7 +37,7 @@ class GameController: ObservableObject {
         }
         
         // Bubble show up interval
-        bubbleTimer = Timer.scheduledTimer(withTimeInterval: 2.8, repeats: true) { _ in
+        bubbleTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
             self.updateBubbles()
         }
         
