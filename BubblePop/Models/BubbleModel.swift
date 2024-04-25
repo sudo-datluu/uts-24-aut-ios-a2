@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreGraphics
 
+// Model present bubble appear on the screen
 struct Bubble: Identifiable, Equatable {
     let id = UUID()
     let color: Color

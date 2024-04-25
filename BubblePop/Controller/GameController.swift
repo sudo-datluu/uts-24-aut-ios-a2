@@ -3,6 +3,7 @@ import Foundation
 
 class GameController: ObservableObject {
     @Published var bubbles: [Bubble] = [] // List of bubbles in the game
+    @Published var bombs: [BombModel] = [] // List of bombs
     @Published var score: Double = 0 // Player's score
     @Published var gameOver: Bool = false // Game over state
     
@@ -11,11 +12,11 @@ class GameController: ObservableObject {
     var playerName: String // Player's name
     var lastBubbleColor: Color? // Saved last pop bubble color
     var remainingTime: Double
-    private var timer: Timer? = nil // Game timer
-    private var bubbleShowUpTimer: Timer? = nil
+    private var gameTimer: Timer? = nil // Game timer
+    private var bubbleTimer: Timer? = nil // Bubble show up timer
+    private var bombTimer: Timer? = nil // Bomb timer
     
     let bubbleSize: CGFloat = 40
-//    private let bubbleQueue = DispatchQueue(label: "bubble.background.queue", qos: .userInitiated)
     
     init(gameDuration: Int, maxBubbles: Int, playerName: String) {
         self.gameDuration = gameDuration
@@ -27,7 +28,7 @@ class GameController: ObservableObject {
     // Start the game by initializing the timer and setting the end time
     func start() {
         // Game timer
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             self.remainingTime -= 1
             if self.remainingTime <= 0 {
                 self.gameOver = true
@@ -36,18 +37,26 @@ class GameController: ObservableObject {
         }
         
         // Bubble show up interval
-        bubbleShowUpTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
+        bubbleTimer = Timer.scheduledTimer(withTimeInterval: 2.8, repeats: true) { _ in
             self.updateBubbles()
+        }
+        
+        // Bomb timer
+        bombTimer = Timer.scheduledTimer(withTimeInterval: 1/30, repeats: true) { _ in
+            self.updateBombs()
         }
     }
 
     // Stop the game by invalidating the timer
     func stop() {
         bubbles.removeAll()
-        timer?.invalidate()
-        bubbleShowUpTimer?.invalidate()
-        timer = nil
-        bubbleShowUpTimer = nil
+        bombs.removeAll()
+        gameTimer?.invalidate()
+        bubbleTimer?.invalidate()
+        bombTimer?.invalidate()
+        gameTimer = nil
+        bubbleTimer = nil
+        bombTimer = nil
     }
 
     // Function to pop a bubble and update the score
@@ -63,6 +72,12 @@ class GameController: ObservableObject {
             return received
         }
         return 0
+    }
+    
+    // Function to handle bomb interaction
+    func touchBomb(_ bomb: BombModel) {
+        score *= 2 // Double the score
+        bombs.removeAll { $0.id == bomb.id } // Remove the bomb
     }
 
     // Function to update the list of bubbles
@@ -84,5 +99,31 @@ class GameController: ObservableObject {
 
         // Replace the existing bubbles with the new non-overlapping set
         self.bubbles = newBubbles
+    }
+    
+    // Function to update the list of the bombs
+    func updateBombs() {
+        for index in bombs.indices {
+            bombs[index].move() //move the bomb
+        }
+        
+        // Filter out-of-bounds bombs
+        bombs = bombs.filter { bomb in
+            bomb.position.x >= 0 && bomb.position.x <= UIScreen.main.bounds.width &&
+            bomb.position.y >= 0 && bomb.position.y <= UIScreen.main.bounds.height
+        }
+        
+        // Bomb would appear with 10%
+        if Double.random(in: 0...1) <= 0.05 {
+            let randomX = CGFloat.random(in: 0...UIScreen.main.bounds.width)
+            let randomY = CGFloat.random(in: 0...UIScreen.main.bounds.height)
+            bombs.append(BombModel(position: CGPoint(x: randomX, y: randomY)))
+        }
+    }
+    
+    // Update game
+    func update() {
+        updateBubbles()
+        updateBombs()
     }
 }

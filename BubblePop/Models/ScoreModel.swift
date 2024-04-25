@@ -6,6 +6,7 @@
 //
 
 import Foundation
+// Model to present score of the player
 struct ScoreModel : Codable {
     var playerName: String
     var score: Double

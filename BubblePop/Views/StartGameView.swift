@@ -12,7 +12,8 @@ struct StartGameView: View {
     var scoreController : ScoreController
     @State private var gameOver : Bool = false
     
-    @State private var animatedScores: [AnimatedScoreModel] = [] // Track animated scores
+    @State private var receivedScores: [AnimatedScoreModel] = [] // Track received scores
+    @State private var bonusScores: [AnimatedScoreModel] = [] // Track deducted scores
     @State private var scoreTimer: Timer? = nil // Timer for score visibility
     var body: some View {
         VStack {
@@ -61,11 +62,11 @@ struct StartGameView: View {
                         .foregroundColor(bubble.color)
                         .onTapGesture {
                             let received = gameController.popBubble(bubble) // Pop the bubble on tap
-                            executeAnimateForScore(received, at: bubble.position)
+                            executeAnimateForScore(received, at: bubble.position, targetScores: &receivedScores)
                         }
                 }
                 
-                ForEach(animatedScores) { animatedScore in
+                ForEach(receivedScores) { animatedScore in
                     Text("+\(animatedScore.value.formatted())")
                         .position(animatedScore.position)
                         .foregroundColor(.green)
@@ -73,6 +74,26 @@ struct StartGameView: View {
                         
                         .transition(.opacity) // Fade-in effect
                         .animation(.easeInOut, value: 1) // Control the duration of visibility
+                }
+                
+                ForEach(bonusScores) { animatedScore in
+                    Text("x2 Scores")
+                        .position(animatedScore.position)
+                        .foregroundColor(.red)
+                        .font(.system(size: 36))
+                        .transition(.opacity) // Fade-in effect
+                        .animation(.easeInOut, value: 1) // Control the duration of visibility
+                }
+                
+                ForEach(gameController.bombs) { bomb in
+                    Rectangle()
+                        .frame(width: bomb.size, height: bomb.size)
+                        .position(x: bomb.position.x, y: bomb.position.y)
+                        .foregroundColor(.orange)
+                        .onTapGesture {
+                            gameController.touchBomb(bomb) // Deduct half the score when touched
+                            executeAnimateForScore(0, at: bomb.position, targetScores: &bonusScores)
+                        }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -85,6 +106,7 @@ struct StartGameView: View {
         .onDisappear {
             gameController.stop() // Stop the game when the view disappears
         }
+        // Alert game over and score of the player
         .alert(isPresented: $gameController.gameOver) {
             Alert(
                 title: Text("Game Over. Your score: \(gameController.score.formatted())"),
@@ -97,14 +119,15 @@ struct StartGameView: View {
         }
     }
     
-    private func executeAnimateForScore(_ score: Double, at position: CGPoint) {
+    private func executeAnimateForScore(_ score: Double, at position: CGPoint, targetScores: inout [AnimatedScoreModel]) {
         let animatedScore = AnimatedScoreModel(value: score, position: position)
-        animatedScores.append(animatedScore) // Add the animated score to the list
+        targetScores.append(animatedScore) // Add the animated score to the list
 
         // Timer to remove the animated score after a delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation {
-                self.animatedScores.removeAll { $0.id == animatedScore.id } // Remove the score after 1.5 seconds
+                self.receivedScores.removeAll { $0.id == animatedScore.id }
+                self.bonusScores.removeAll { $0.id == animatedScore.id }
             }
         }
     }

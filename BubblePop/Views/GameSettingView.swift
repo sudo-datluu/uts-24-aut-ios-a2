@@ -11,7 +11,7 @@ struct GameSettingView: View {
     var scoreController: ScoreController
     @State private var playerName: String = "player"
     @State private var gameDuration: Double = 60 // Default game time in seconds
-    @State private var maxBubbles: Double = 10 // Default maximum number of bubbles
+    @State private var maxBubbles: Double = 15 // Default maximum number of bubbles
     @State private var startGame: Bool = false // State to control when to start the game
 
     
@@ -34,7 +34,7 @@ struct GameSettingView: View {
 
         //Set up game duration
         Text("Game Duration: \(Int(gameDuration)) seconds")
-        Slider(value: $gameDuration, in: 0...100, step: 1).padding()
+        Slider(value: $gameDuration, in: 10...100, step: 1).padding()
         
         //Set up max number of bubbles
         Text("Max number of bubbles: \(Int(maxBubbles))")

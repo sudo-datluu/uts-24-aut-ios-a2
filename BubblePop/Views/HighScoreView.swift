@@ -17,7 +17,7 @@ struct HighScoreView: View {
                     .foregroundColor(.red)
                     .font(.title)
                     .padding(50)
-                
+                // Start new game
                 NavigationLink(
                     destination: GameSettingView(scoreController: scoreController),
                     label: {
@@ -26,7 +26,9 @@ struct HighScoreView: View {
                             .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                     }
                 )
+                // Wait until the score is load
                 if isLoaded {
+                    // Show list of the high score
                     List(scoreController.getScores().enumerated().map { $0 }, id: \.element.id) { index, score in
                         HStack {
                             Text("Rank \(index+1): ")

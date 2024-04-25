@@ -35,10 +35,11 @@ class ScoreController {
         
         // Sort top scores in descending order
         scores.sort { $0.score > $1.score }
+        
+        // Only save top 10 scores
         if scores.count > 10 {
             scores = Array(scores[0..<10])
         }
-        
         
         if let data = try? JSONEncoder().encode(scores) {
             try? data.write(to: fileURL) // Save updated scores to JSON
