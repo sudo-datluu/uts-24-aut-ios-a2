@@ -25,9 +25,18 @@ struct StartGameView: View {
                 
                 Text("Time remains: \(Int(gameController.remainingTime))")
                     .padding()
+                
+                // Landscape
+                if UIDevice.current.orientation.rawValue >= 3 {
+                    Text("High score: \(scoreController.getHighScore())")
+                        .padding()
+                }
             }
-            Text("High score: \(scoreController.getHighScore())")
-                .padding()
+            // Potrait
+            if UIDevice.current.orientation.rawValue <= 1 {
+                Text("High score: \(scoreController.getHighScore())")
+                    .padding()
+            }
             
             // Show navigation if the game is over
             if (gameOver) {

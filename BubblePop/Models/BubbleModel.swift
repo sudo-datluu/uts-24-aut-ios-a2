@@ -58,8 +58,11 @@ struct Bubble: Identifiable, Equatable {
     
     // Get random location
     static func randomLocation(bubbleSize: CGFloat) -> CGPoint {
-        let randomX = CGFloat.random(in: bubbleSize...(UIScreen.main.bounds.width - bubbleSize))
-        let randomY = CGFloat.random(in: bubbleSize...(UIScreen.main.bounds.height - bubbleSize - 250))
+        let offsetX = UIDevice.current.orientation.rawValue < 3 ? 0 : 100
+        let offsetY = UIDevice.current.orientation.rawValue < 3 ? 200 : 120
+        
+        let randomX = CGFloat.random(in: bubbleSize...(UIScreen.main.bounds.width - bubbleSize - CGFloat(offsetX)))
+        let randomY = CGFloat.random(in: bubbleSize...(UIScreen.main.bounds.height - bubbleSize - CGFloat(offsetY)))
         return CGPoint(x: randomX, y: randomY)
     }
 
